@@ -1,6 +1,6 @@
-import random
 from models.fishes import Tuna, Shark
 from settings import Settings
+import random
 
 class Ocean :
 
@@ -9,30 +9,31 @@ class Ocean :
         self.height = Settings.ocean_height
         self.ecosystem = {}
 
-    def generate_fishes(self):
-        compteur_tuna = 0
-        compteur_shark = 0
-        
-        # TANT QUE je ne dépasse pas le nombre maximum de Fish
-        # Je générer des poissons ou des cases vides
-        for i in range(self.height):
-            for j in range(self.width):
-                aleatoire = random.choice([1,2,3])
-                if aleatoire == 1 and compteur_tuna <= Settings.nb_tunas:
-                    self.ecosystem[(i,j)] = Tuna(position=(i,j))
-                    compteur_tuna += 1
-                    #une fois nb_tuna atteint, il faut stopper la generation de tuna
-                elif aleatoire == 2 and compteur_shark <= Settings.nb_sharks:
-                    self.ecosystem[(i,j)] = Shark(position=(i,j))
-                    compteur_shark += 1
-                elif aleatoire == 3:
-                    None
+        for i in range(Settings.ocean_height):
+            for j in range(Settings.ocean_width):
+                self.ecosystem[(i,j)] = None
 
-        print("NB Tunas : ", compteur_tuna)
-        print("NB Shark : ", compteur_shark)
+    def generate_fishes(self):
+        sharks_count = 0
+        tunas_count = 0
+        # Tant que le nb de shark ou de tuna n'est pas atteint
+        # continuer à choisir aléatoirement une case parmi les case innocupés et y mettre un shark ou un tuna
+        while sharks_count < Settings.nb_sharks or tunas_count < Settings.nb_tunas:
+            available_positions = [key for key, value in ocean.ecosystem.items() if value is None]
+            random_position = random.choice(available_positions)
+
+            aleatoire = random.choice([1,2])
+            if aleatoire == 1 and sharks_count < Settings.nb_sharks:
+                self.ecosystem[random_position] = Shark(position=random_position)
+                sharks_count += 1
+            elif aleatoire == 2 and tunas_count < Settings.nb_tunas:
+                self.ecosystem[random_position] = Tuna(position=random_position)
+                tunas_count += 1
+
 
 
 ocean = Ocean()
 ocean.generate_fishes()
-
 print(len(ocean.ecosystem))
+print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
+print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)]))
