@@ -30,6 +30,8 @@ class Ocean :
                 self.ecosystem[random_position] = Tuna(position=random_position)
                 tunas_count += 1
 
+    
+
 
 
 """ ocean = Ocean()
@@ -38,7 +40,5 @@ print(len(ocean.ecosystem))
 print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
 print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)])) """
 
-def move():
-    #je commence pour scanner les positions adjacentes
-    #cad quelle est la valeur de l elt du dictionnaire ou je me situe
-    pass
+
+
