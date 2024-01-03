@@ -1,56 +1,38 @@
 import random
+from models.fishes import Tuna, Shark
 from settings import Settings
-
-class Fish :
-    def __init__(self, position : tuple):
-        self.position = position
-    
-    def move (self):
-        pass
-
-    def reproduce (self):
-        pass
-
-
-class Tuna (Fish) :
-    pass
-
-
-class Shark (Fish):
-    energy = Settings.shark_energy
-
 
 class Ocean :
 
     def __init__(self) :
         self.width = Settings.ocean_width
         self.height = Settings.ocean_height
-        self.grid = {}
+        self.ecosystem = {}
 
     def generate_fishes(self):
-        i = 0
-        j = 0
-        compteur = 0
-
+        compteur_tuna = 0
+        compteur_shark = 0
+        
         # TANT QUE je ne dépasse pas le nombre maximum de Fish
         # Je générer des poissons ou des cases vides
-        while i < self.height:
-            while j < self.width:
+        for i in range(self.height):
+            for j in range(self.width):
                 aleatoire = random.choice([1,2,3])
-                if aleatoire == 1:
-                    self.grid[(i,j)] = Tuna(position=(i,j))
-                    compteur += 1
-                elif aleatoire == 2:
-                    self.grid[(i,j)] = Shark(position=(i,j))
-                    compteur += 1
+                if aleatoire == 1 and compteur_tuna <= Settings.nb_tunas:
+                    self.ecosystem[(i,j)] = Tuna(position=(i,j))
+                    compteur_tuna += 1
+                    #une fois nb_tuna atteint, il faut stopper la generation de tuna
+                elif aleatoire == 2 and compteur_shark <= Settings.nb_sharks:
+                    self.ecosystem[(i,j)] = Shark(position=(i,j))
+                    compteur_shark += 1
                 elif aleatoire == 3:
                     None
-                j += 1
 
-            i += 1
-            j = 0
+        print("NB Tunas : ", compteur_tuna)
+        print("NB Shark : ", compteur_shark)
 
-            
+
 ocean = Ocean()
 ocean.generate_fishes()
-print(len(ocean.grid))
+
+print(len(ocean.ecosystem))
