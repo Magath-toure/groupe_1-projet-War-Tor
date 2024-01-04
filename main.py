@@ -30,8 +30,6 @@ class Ocean :
                 self.ecosystem[random_position] = Tuna(position=random_position)
                 tunas_count += 1
 
-    
-
 
 
 ocean = Ocean()
@@ -39,6 +37,3 @@ ocean.generate_fishes()
 print(len(ocean.ecosystem))
 print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
 print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)]))
-
-
-
