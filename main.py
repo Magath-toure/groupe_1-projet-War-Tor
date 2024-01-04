@@ -46,6 +46,7 @@ class Ocean :
 
 ocean = Ocean()
 ocean.generate_fishes()
-print(len(ocean.ecosystem))
-print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
-print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)]))
+# print(len(ocean.ecosystem))
+# print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
+# print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)]))
+ocean.display_ecosystem()
