@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-#from main import Ocean
-=======
->>>>>>> main
 from settings import Settings
 
 class Fish:
@@ -53,7 +49,6 @@ class Tuna (Fish) :
 
 
 class Shark (Fish):
-<<<<<<< HEAD
     energy = Settings.shark_energy
 
     #1/si case thon =,differente j y vais == ma position devient celle du thon, je remplace la valeur thon ds le tuple de cette position
@@ -64,6 +59,3 @@ class Shark (Fish):
     ##si requin: j y vais et ma valeur remplace thon dans le tuple 
     #choix prioritaire
     pass
-=======
-    energy = Settings.shark_energy
->>>>>>> main
