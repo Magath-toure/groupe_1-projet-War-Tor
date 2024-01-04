@@ -11,6 +11,7 @@ class Fish:
         #pass
     def move_fishes(self, current_position):
         #a faire plus tard: modalités de parcours des positions
+        #tous les thons puis tous les requins
 
         #récupération des cases adjaçentes
         north_position = (current_position[0] - 1, current_position[1])
