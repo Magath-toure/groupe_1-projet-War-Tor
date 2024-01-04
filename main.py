@@ -23,7 +23,7 @@ class Ocean :
         # Tant que le nb de shark ou de tuna n'est pas atteint
         # continuer à choisir aléatoirement une case parmi les case innocupés et y mettre un shark ou un tuna
         while sharks_count < Settings.nb_sharks or tunas_count < Settings.nb_tunas:
-            available_positions = [key for key, value in ocean.ecosystem.items() if value is None]
+            available_positions = [key for key, value in self.ecosystem.items() if value is None]
             random_position = random.choice(available_positions)
 
             aleatoire = random.choice([1,2])
@@ -33,49 +33,19 @@ class Ocean :
             elif aleatoire == 2 and tunas_count < Settings.nb_tunas:
                 self.ecosystem[random_position] = Tuna(position=random_position)
                 tunas_count += 1
-    
-    '''def update_exosystem (self):
 
-        # Mettre à jour l'écosystème en fonction des règles définies
+    def display_ecosystem(self):
+        print("Number of sharks : ", len([key for key, value in self.ecosystem.items() if isinstance(value, Shark)]))
+        print("Number of tunas : ", len([key for key, value in self.ecosystem.items() if isinstance(value, Tuna)]))
         for i in range(Settings.ocean_height):
+            line_fishes = []
             for j in range(Settings.ocean_width):
-                # Appliquer les règles pour le déplacement, la reproduction, etc.
-                # en fonction du type de poisson à cette position (i, j)
-                # Mettre à jour l'état des poissons dans l'écosystème'''
-
-
-
-
-  
-            
-
-        #donner les instructions à suivre en fonction de la case
+                to_add = None if self.ecosystem[(i,j)] is None else type(self.ecosystem[(i,j)]).__name__
+                line_fishes.append(to_add)
+            print(line_fishes)
 
 ocean = Ocean()
 ocean.generate_fishes()
-for i in range(Settings.ocean_height):
-    ligne = ""
-    for j in range(Settings.ocean_width):
-        if isinstance (ocean.ecosystem[(i,j)], Tuna) :
-            ligne += "T"
-        elif isinstance (ocean.ecosystem[(i,j)], Shark) :
-            ligne += "S"
-        else:
-            ligne += " "
-    print(ligne)
-    
-tuna = Fish()
-tuna.move_fishes()
-for tuna in ocean.ecosystem :
-    if isinstance (tuna[(i,j)]) :
-        Fish.self.position [0] -= 1
-        tuna.move()
-    
-
-
-# print(len(ocean.ecosystem))
-# print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
-# print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)]))
-
-
-
+print(len(ocean.ecosystem))
+print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
+print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)]))
