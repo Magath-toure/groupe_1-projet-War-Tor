@@ -1,7 +1,17 @@
+import os
+#import colored
+from colorama import Fore, Style
 from models.fishes import Tuna, Shark, Fish
 from settings import Settings
 import random
 import time
+
+
+class Bcolors :
+    red = '\033[91m'
+    blue = '\033[96m'
+    green = '\033[92m'
+
 
 class Ocean :
 
@@ -34,13 +44,27 @@ class Ocean :
     def display_ecosystem(self):
         #print("Number of sharks : ", len([key for key, value in self.ecosystem.items() if isinstance(value, Shark)]))
         #print("Number of tunas : ", len([key for key, value in self.ecosystem.items() if isinstance(value, Tuna)]))
+        
+        for i in range(Settings.ocean_height):
+            ligne = ""
+            for j in range(Settings.ocean_width):
+                if isinstance (ocean.ecosystem[(i,j)], Tuna) :
+                    ligne += f"{Fore.GREEN}T{Style.RESET_ALL}"
+                elif isinstance (ocean.ecosystem[(i,j)], Shark) :
+                    ligne += f"{Fore.RED}S{Style.RESET_ALL}"
+                else:
+                    ligne += " "
+            print(ligne)
+    
+        '''
         for i in range(Settings.ocean_height):
             line_fishes = []
             for j in range(Settings.ocean_width):
                 to_add = None if self.ecosystem[(i,j)] is None else type(self.ecosystem[(i,j)]).__name__
                 line_fishes.append(to_add)
             print(line_fishes) 
-        print ("____________________________________________________")
+            '''
+        
 
     #methode qui lance le mouvement perpetuel vers une case vide
     def move_fish_to_empty(self):
@@ -49,8 +73,11 @@ class Ocean :
             for elt in self.ecosystem.items():
                 if elt[1] is not None:
                     elt[1].move(self.ecosystem)                    
-                    self.display_ecosystem()
-                    time.sleep(1)
+            os.system('cls' if os.name == 'nt' else 'clear')        
+
+            self.display_ecosystem()
+            time.sleep(1)
+
 
     
 ocean = Ocean()
