@@ -1,6 +1,7 @@
 from models.fishes import Tuna, Shark, Fish
 from settings import Settings
 import random
+import time
 
 class Ocean :
 
@@ -39,22 +40,23 @@ class Ocean :
                 to_add = None if self.ecosystem[(i,j)] is None else type(self.ecosystem[(i,j)]).__name__
                 line_fishes.append(to_add)
             print(line_fishes) 
+        print ("____________________________________________________")
 
-    
+    #methode qui lance le mouvement perpetuel vers une case vide
+    def move_fish_to_empty(self):
+        while True:
+            #deplacer l ensemble des poissons vers une case vide adjacente
+            for elt in self.ecosystem.items():
+                if elt[1] is not None:
+                    elt[1].move(self.ecosystem)                    
+                    self.display_ecosystem()
+                    time.sleep(1)
 
     
 ocean = Ocean()
 ocean.generate_fishes()
 ocean.display_ecosystem()
-
-""" for item in ocean.ecosystem:
-    if  isinstance(item[1], Tuna):
-        item[1].move_fishes("north_position") """
+ocean.move_fish_to_empty()
 
 
 
-
-
-print(len(ocean.ecosystem))
-print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Shark)]))
-print(len([key for key, value in ocean.ecosystem.items() if isinstance(value, Tuna)]))
