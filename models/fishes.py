@@ -4,33 +4,39 @@ class Fish:
     def __init__(self, position : tuple):
         self.position = position
     
-    #def move(self, position):
+    
     #je commence pour scaner les positions adjacentes
-        # la position est donnée en parametre    
-        #pass
-    def move_fishes(self, current_position):
-        #a faire plus tard: modalités de parcours des positions
-        #tous les thons puis tous les requins
-
-        #récupération des cases adjaçentes
+    #je code le movement ici:pas de probleme d import
+    #je cree un dictionnaire un sous de cases adjacentes
+    def check_adjacent_places(self, current_position : tuple):
         north_position = (current_position[0] - 1, current_position[1])
         south_position = (current_position[0] + 1, current_position[1])
         west_position = (current_position[0], current_position[1] - 1)
         east_position = (current_position[0], current_position[1] + 1)
-        #analyse des 4 positions=> dans un dictionnaire de 4 elts
+        adjacent_positions = [north_position, south_position, east_position, west_position]                 
+        return [key for key, value in self.ecosystem.items() if key in adjacent_positions]  
+    
+    # je cree le movement
+    def move(self):
+        #tant qu il reste des poissons
 
-        #recherche de la valeur(thon shark ou none?) correspondant à la position
+        #si la valeur de item[1] est Shark
+        #si dabns les cases il y a des poissons, il y va de façon aleatoire
+        #sinon rien
 
-        #en fonction de cette valeur :
 
-        #si case vide j y vais ok pour thon et shark(meme si second choix)
+        #si la valeur de item[1] est Tuna
+        #si dans les cases il ya du vide il y va de façon aléatoire
+        pass
 
-        #si case idem je ne bouge pas ok pour thon et shark
 
-        #si case differente :
+    def move_fishes(self, direction):
+        
 
-        ##si thon si possible je bouge sinon c est quasiment mort== ne bouge pas
-        ##si requin: j y vais et ma valeur remplace thon dans le tuple 
+
+        
+        
+    
         pass
 
     def reproduce (self):
@@ -39,12 +45,8 @@ class Fish:
 
 class Tuna (Fish) :
     #1/si case vide j y vais == ma position devient celle de la case vide
-    #2/si case idem =thon je n y vais pas == ma positipon reste identique
-    #3/si case requin ? 1 er niveau je ne fais rien
-
-    #si case differente :
-    ##si thon si possible je bouge sinon c est quasiment mort== ne bouge pas
- 
+    
+   
     pass
 
 
@@ -53,9 +55,7 @@ class Shark (Fish):
 
     #1/si case thon =,differente j y vais == ma position devient celle du thon, je remplace la valeur thon ds le tuple de cette position
     #2/sinon si case vide: je verifie les autres vases,1 er niveau par defaut ma position devient celle de la case vide j y vais
-    #3/sinon si case idem = requin : je ny vais pas ma position reste identique
 
-    #si case differente :
-    ##si requin: j y vais et ma valeur remplace thon dans le tuple 
-    #choix prioritaire
     pass
+test = Fish()
+test.check_adjacent_places((2,2))
